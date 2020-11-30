@@ -1,0 +1,183 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+#Loading Tidyverse, dplyr.
+
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+library(dplyr)
+```
+
+#reading in the dataset
+
+
+```{r}
+books <- read_csv("data/books.csv")
+```
+
+#checking out the various aspects of the data: row, column, glimpse, how many NA values etc.
+
+
+```{r}
+books
+```
+
+
+```{r}
+dim(books)
+```
+
+
+```{r}
+sum(is.na(books))
+```
+
+```{r}
+nrow(books)
+```
+
+```{r}
+ncol(books)
+```
+
+
+```{r}
+names(books)
+```
+
+
+```{r}
+glimpse(books)
+```
+
+
+```{r}
+view(books)
+```
+
+
+```{r}
+books %>% 
+  summarise(across(.fns = ~sum(is.na(.x))))
+```
+
+#I'm curious about what people think about certain subsets of books on GoodReads. 
+
+#So I'm going to start by finding the average rating given to a book on the site. I'll use mean, and not mode (the most common rating is not worth much when there are 500 possible ratings) or median (not worth very much when it's in the middle of millions of user-given reviews).
+
+
+```{r}
+books %>% 
+  summarise(mean(average_rating, na.rm = TRUE))
+```
+
+#the mean rating for all books in the Goodreads dataset is 3.937.
+
+
+#Initially, I'm curious how people are likely to rate longer books in comparison to shorter ones. If longer books are generally rated lower, it could indicate that people in general find it a bit of a drag to finish something longer (or it could indicate that Goodreads users are likelier to be people with less time, or shorter attention spans, or a range of other things). If longer books are rated higher, it could indicate that Goodreads are older, since longer books tend to be for a more mature audience. Or once again, a range of other things.
+
+
+
+#creating a variable for shorter books
+
+```{r}
+hundred_to_three_hundred_pages <- 
+  books %>% 
+  filter(num_pages >= 100 & num_pages <=300)
+```
+
+#finding the mean rating of shorter books (100-300 pages).
+
+
+```{r}
+hundred_to_three_hundred_pages %>% 
+  summarise(mean(average_rating))
+```
+
+#creating a variable for longer books (400- 600 pages; skipped 301-399 pages to account for any overlap in the two datasets).
+
+```{r}
+four_hundred_to_six_hundred_pages <- 
+  books %>% 
+  filter(num_pages >= 400 & num_pages <= 600)
+```
+
+#finding the mean rating of longer books
+
+
+```{r}
+four_hundred_to_six_hundred_pages %>% 
+  summarise(mean(average_rating))
+```
+
+
+#so longer books have an average rating of 3.971 against 3.903 for shorter books. The difference isn't huge. I don't think it's a big enough discrepancy to draw many conclusions from. What is interesting to note is that the books in the 400-600 page range have an average which is marginally higher than the general (3.937), and the ones in the 100-300 page range have an average which is marginally lower. This tells us that Goodreads users tend to enjoy longer books over shorter ones, or rate them more highly at least.
+
+#what if I take a different route and look at the ratings of the most widely read books on Goodreads? Will there be a difference between the ones that have a rating below and above the general average? 
+
+
+#creating a variable which only includes the 50 most widely read books on Goodreads.
+
+
+```{r}
+fifty_most_read_books <-
+books %>% 
+  arrange(desc(ratings_count)) %>% 
+  head(50)
+```
+
+
+#creating a variable from the one above which filters out the ones with a rating above the average Goodreads rating or 3.937.
+
+
+```{r}
+fifty_most_read_books_above_average_rated <-
+fifty_most_read_books %>% 
+  filter(average_rating > 3.937)
+```
+
+#and one which filters out the ones with a rating below 3.937.
+
+
+```{r}
+fifty_most_read_books_below_average_rated <-
+fifty_most_read_books %>% 
+  filter(average_rating < 3.937) %>% 
+  arrange(average_rating)
+
+```
+
+
+#having a look at the data
+
+```{r}
+fifty_most_read_books_below_average_rated %>% 
+  arrange(average_rating)
+
+```
+
+
+
+```{r}
+fifty_most_read_books_above_average_rated %>% 
+  arrange(authors)
+```
+
+#so, looking at the 16 most widely read books with a rating below the general average, one of the interesting things I can see here is  that most of them are literature classics first published last century (the publication dates that have been entered are for revised editions, I assume. Many of these books are widely used as English/literature class staples (Animal Farm, Scarlet Letter, Of Mice and Men).
+
+#if we look at the other set of books rated above average, we can see that it contains newer literature that is generally read by younger people/ recreationally (The Harry Potter, Lord of the Rings and Percy Jackon series; Charlotte's Web. Game of Thrones, Outlander), as opposed to for a course. The other set contains coming-of-age literature but all first published nearly a century ago and common class reading (Lord of the Flies, Catcher in the Rye and the Adventures of Tom and Huck). 
+
+#what this could tell us about the ratings: people prefer easier, more reacreational reading? Or that they have happier memories (which convert to higher ratings) of the books that they read by themselves as opposed to the ones they had to read in class/at university?
+
+#also tells us that Dan Brown's books are widely read, but rated below par by Goodreads users.
+
+
+
+

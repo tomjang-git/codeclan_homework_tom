@@ -1,0 +1,102 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+library(tidyverse)
+```
+
+
+```{r}
+starbucks <- read_csv("data/starbucks_drinkMenu_expanded.csv")
+```
+
+
+```{r}
+ncol(starbucks)
+```
+
+```{r}
+nrow(starbucks)
+```
+
+```{r}
+dim(starbucks)
+```
+
+
+```{r}
+names(starbucks)
+```
+
+
+```{r}
+head(starbucks)
+```
+
+
+```{r}
+calorie_diff <- select(starbucks, 135 - "Calories")
+```
+
+```{r}
+select(starbucks, -Beverage)
+```
+
+
+
+
+```{r}
+starbucks
+```
+
+
+
+
+```{r}
+select(starbucks, Beverage)
+```
+
+
+
+```{r}
+select(starbucks, Beverage_category, Beverage, Beverage_prep, Calories)
+```
+
+
+```{r}
+q2 <- select(starbucks, Beverage_category, Beverage, Beverage_prep, Calories)
+```
+
+```{r}
+q2
+```
+
+
+
+
+```{r}
+is.na(q2)
+```
+
+
+```{r}
+calorie_diff <- filter(starbucks, Calories - "135")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

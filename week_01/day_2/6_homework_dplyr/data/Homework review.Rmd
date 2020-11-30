@@ -1,0 +1,72 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+drinks_content <- read_csv("starbucks_drinkMenu_expanded.csv")
+```
+
+
+```{r}
+dim(drinks_content)
+```
+
+```{r}
+names(drinks_content)
+```
+
+
+```{r}
+names(drinks_content)
+```
+
+1.'select;
+2.'filter'
+3.'arrange'
+4.'summarise'/'group_by'
+5.'mutate'
+
+
+```{r}
+drinks_content
+  select(Beverage_category, Beverage, Beverage_prep, Calories)
+
+  filter(is.na(Calories))
+```
+
+
+question 3
+
+
+```{r}
+drinks_content %>%
+  mutate(calorie_diff = 135 - Calories)
+```
+
+question 4
+
+```{r}
+drinks_content %>%
+  group_by(Beverage_category) %>%
+  summarise(avg_calories = mean(Calories))
+```
+
+
+```{r}
+select(tail, 10 (drinks_content, "Calories"))
+```
+
+
+
+
+
+
+
+
+
+
