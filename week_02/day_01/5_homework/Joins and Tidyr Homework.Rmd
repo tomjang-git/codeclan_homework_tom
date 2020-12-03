@@ -1,0 +1,109 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+
+```{r}
+library(tidyverse)
+```
+
+
+```{r}
+library(janitor)
+```
+
+
+```{r}
+card_base <-
+read_csv("data/CardBase.csv")
+```
+
+
+```{r}
+customer_base <-
+read_csv("data/CustomerBase.csv")
+```
+
+
+```{r}
+fraud_base <-
+read_csv("data/FraudBase.csv")
+```
+
+
+```{r}
+transaction_base <-
+read_csv("data/TransactionBase.csv")
+```
+
+#Question 2
+
+```{r}
+card_with_customers <-
+  inner_join(card_base, customer_base, by = "Cust_ID")
+```
+
+```{r}
+card_with_customers
+```
+
+#Question 3
+
+```{r}
+
+full_join(fraud_base, transaction_base)
+```
+
+#Resulting row number, with no new rows, tells us that all Fraud Flags are matched in the original transaction base data.
+
+
+#Question 4
+
+```{r}
+semi_join(card_base, transaction_base, by = c("Card_Number" = "Credit_Card_ID"))
+```
+
+
+
+
+
+
+
+
+#5
+
+```{r}
+hat <-
+read_csv("data/hat_observations.csv")
+```
+```{r}
+hat
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

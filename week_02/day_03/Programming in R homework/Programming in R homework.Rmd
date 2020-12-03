@@ -1,0 +1,203 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r}
+library(tidyverse)
+```
+
+
+
+Homework
+
+#Question 1
+
+```{r}
+weather <- list(
+  "Thursday" = list(temp_C = 4, chance_of_rain = 20, wind_speed_mph = 9),
+  "Friday" = list(temp_C = 7, chance_of_rain = 90, wind_speed_mph = 18),
+  "Saturday" = list(temp = 6, chance_of_rain = 70, wind_speed_mph = 10)
+)
+
+weather
+```
+
+
+#Question 2
+
+#i
+```{r}
+weather$Thursday$chance_of_rain
+```
+#ii
+```{r}
+weather$Friday$wind_speed
+```
+#iii
+```{r}
+weather$Thursday$temp_C
+```
+
+
+#Question 3
+
+
+```{r}
+weather_two_week <-
+  matrix(c(5, 8, 7, 7, 6, 7, 8, 8, 8, 8, 8, 8, 8, 8), nrow = 2, ncol = 7, byrow = TRUE)
+rownames(weather_two_week) <- c("week_1", "week_2")
+colnames(weather_two_week) <- c("thurs", "fri", "sat", "sun","mon", "tues", "wed")
+weather_two_week
+```
+
+
+#Question 4
+
+#i
+```{r}
+weather_two_week["week_2", "sat"]
+```
+
+#ii
+```{r}
+weather_two_week["week_2", ]
+```
+
+#iii
+```{r}
+weather_two_week[, c("thurs", "sat", "sun")]
+```
+
+
+#Question 5
+
+```{r}
+library(stringr)
+```
+
+```{r}
+format_char <- function(x){
+  return(str_c("The answer is ", x))
+}
+```
+
+```{r}
+format_num <- function(x){
+  if (x < 10){
+  return(x)
+}
+
+if (x > 10){
+  return(x/10)
+}  
+  }
+
+```
+
+```{r}
+format_question_five <- function(x){
+  if (is.character(x)){
+    return(format_char(x))
+  }
+  
+  if (is.numeric(x)){
+    return(format_num(x))
+  }  
+  else 
+    print("Invalid input")
+  
+}
+```
+
+#Shortening the answer to Question 5
+
+```{r}
+format_question_five <- function(x){
+  if (is.character(x)){
+    return(str_c("The answer is ", x))
+  }
+  
+  if (is.numeric(x)){
+    if (x < 10){
+    return(x)
+  }  
+  if (x > 10){
+    return(x/10)
+  }
+  }
+  else{
+    print("Invalid Input")
+  }
+  
+}
+```
+
+```{r}
+format_question_five("k;asdhfaksdjfh")
+```
+
+
+#Question 6
+
+#Didn't quite get this one, my attempt below
+
+```{r}
+format_question_six <- function(x, y){
+  if (x == y)
+  print("Exactly the same")
+}
+  if (x = y)
+  print("The same")
+}
+
+  
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
