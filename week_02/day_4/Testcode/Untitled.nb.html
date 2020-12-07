@@ -1799,250 +1799,101 @@ summary {
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5gYGAifQ== -->
-<pre class="r"><code>library(tidyverse)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUmVnaXN0ZXJlZCBTMyBtZXRob2RzIG92ZXJ3cml0dGVuIGJ5ICdkYnBseXInOlxuICBtZXRob2QgICAgICAgICBmcm9tXG4gIHByaW50LnRibF9sYXp5ICAgICBcbiAgcHJpbnQudGJsX3NxbCAgICAgIFxu4pSA4pSAIEF0dGFjaGluZyBwYWNrYWdlcyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIAgdGlkeXZlcnNlIDEuMy4wIOKUgOKUgFxu4pyTIGdncGxvdDIgMy4zLjIgICAgIOKckyBwdXJyciAgIDAuMy40XG7inJMgdGliYmxlICAzLjAuNCAgICAg4pyTIGRwbHlyICAgMS4wLjJcbuKckyB0aWR5ciAgIDEuMS4yICAgICDinJMgc3RyaW5nciAxLjQuMFxu4pyTIHJlYWRyICAgMS40LjAgICAgIOKckyBmb3JjYXRzIDAuNS4wXG5wYWNrYWdlIOKAmGdncGxvdDLigJkgd2FzIGJ1aWx0IHVuZGVyIFIgdmVyc2lvbiAzLjYuMnBhY2thZ2Ug4oCYdGliYmxl4oCZIHdhcyBidWlsdCB1bmRlciBSIHZlcnNpb24gMy42LjJwYWNrYWdlIOKAmHRpZHly4oCZIHdhcyBidWlsdCB1bmRlciBSIHZlcnNpb24gMy42LjJwYWNrYWdlIOKAmHJlYWRy4oCZIHdhcyBidWlsdCB1bmRlciBSIHZlcnNpb24gMy42LjJwYWNrYWdlIOKAmHB1cnJy4oCZIHdhcyBidWlsdCB1bmRlciBSIHZlcnNpb24gMy42LjJwYWNrYWdlIOKAmGRwbHly4oCZIHdhcyBidWlsdCB1bmRlciBSIHZlcnNpb24gMy42LjLilIDilIAgQ29uZmxpY3RzIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgCB0aWR5dmVyc2VfY29uZmxpY3RzKCkg4pSA4pSAXG54IGRwbHlyOjpmaWx0ZXIoKSBtYXNrcyBzdGF0czo6ZmlsdGVyKClcbnggZHBseXI6OmxhZygpICAgIG1hc2tzIHN0YXRzOjpsYWcoKVxuIn0= -->
-<pre><code>Registered S3 methods overwritten by &#39;dbplyr&#39;:
-  method         from
-  print.tbl_lazy     
-  print.tbl_sql      
-── Attaching packages ───────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
-✓ ggplot2 3.3.2     ✓ purrr   0.3.4
-✓ tibble  3.0.4     ✓ dplyr   1.0.2
-✓ tidyr   1.1.2     ✓ stringr 1.4.0
-✓ readr   1.4.0     ✓ forcats 0.5.0
-package ‘ggplot2’ was built under R version 3.6.2package ‘tibble’ was built under R version 3.6.2package ‘tidyr’ was built under R version 3.6.2package ‘readr’ was built under R version 3.6.2package ‘purrr’ was built under R version 3.6.2package ‘dplyr’ was built under R version 3.6.2── Conflicts ──────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-x dplyr::filter() masks stats::filter()
-x dplyr::lag()    masks stats::lag()</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Homework</p>
-<p>#Question 1</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud2VhdGhlciA8LSBsaXN0KFxuICBcIlRodXJzZGF5XCIgPSBsaXN0KHRlbXBfQyA9IDQsIGNoYW5jZV9vZl9yYWluID0gMjAsIHdpbmRfc3BlZWRfbXBoID0gOSksXG4gIFwiRnJpZGF5XCIgPSBsaXN0KHRlbXBfQyA9IDcsIGNoYW5jZV9vZl9yYWluID0gOTAsIHdpbmRfc3BlZWRfbXBoID0gMTgpLFxuICBcIlNhdHVyZGF5XCIgPSBsaXN0KHRlbXAgPSA2LCBjaGFuY2Vfb2ZfcmFpbiA9IDcwLCB3aW5kX3NwZWVkX21waCA9IDEwKVxuKVxuXG53ZWF0aGVyXG5gYGAifQ== -->
-<pre class="r"><code>weather &lt;- list(
-  &quot;Thursday&quot; = list(temp_C = 4, chance_of_rain = 20, wind_speed_mph = 9),
-  &quot;Friday&quot; = list(temp_C = 7, chance_of_rain = 90, wind_speed_mph = 18),
-  &quot;Saturday&quot; = list(temp = 6, chance_of_rain = 70, wind_speed_mph = 10)
-)
-
-weather</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>#Question 2</p>
-<p>#i</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud2VhdGhlciRUaHVyc2RheSRjaGFuY2Vfb2ZfcmFpblxuYGBgIn0= -->
-<pre class="r"><code>weather$Thursday$chance_of_rain</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDIwXG4ifQ== -->
-<pre><code>[1] 20</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>#ii</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud2VhdGhlciRGcmlkYXkkd2luZF9zcGVlZFxuYGBgIn0= -->
-<pre class="r"><code>weather$Friday$wind_speed</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDE4XG4ifQ== -->
-<pre><code>[1] 18</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>#iii</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud2VhdGhlciRUaHVyc2RheSR0ZW1wX0NcbmBgYCJ9 -->
-<pre class="r"><code>weather$Thursday$temp_C</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDRcbiJ9 -->
-<pre><code>[1] 4</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>#Question 3</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud2VhdGhlcl90d29fd2VlayA8LVxuICBtYXRyaXgoYyg1LCA4LCA3LCA3LCA2LCA3LCA4LCA4LCA4LCA4LCA4LCA4LCA4LCA4KSwgbnJvdyA9IDIsIG5jb2wgPSA3LCBieXJvdyA9IFRSVUUpXG5yb3duYW1lcyh3ZWF0aGVyX3R3b193ZWVrKSA8LSBjKFwid2Vla18xXCIsIFwid2Vla18yXCIpXG5jb2xuYW1lcyh3ZWF0aGVyX3R3b193ZWVrKSA8LSBjKFwidGh1cnNcIiwgXCJmcmlcIiwgXCJzYXRcIiwgXCJzdW5cIixcIm1vblwiLCBcInR1ZXNcIiwgXCJ3ZWRcIilcbndlYXRoZXJfdHdvX3dlZWtcbmBgYCJ9 -->
-<pre class="r"><code>weather_two_week &lt;-
-  matrix(c(5, 8, 7, 7, 6, 7, 8, 8, 8, 8, 8, 8, 8, 8), nrow = 2, ncol = 7, byrow = TRUE)
-rownames(weather_two_week) &lt;- c(&quot;week_1&quot;, &quot;week_2&quot;)
-colnames(weather_two_week) &lt;- c(&quot;thurs&quot;, &quot;fri&quot;, &quot;sat&quot;, &quot;sun&quot;,&quot;mon&quot;, &quot;tues&quot;, &quot;wed&quot;)
-weather_two_week</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgIHRodXJzIGZyaSBzYXQgc3VuIG1vbiB0dWVzIHdlZFxud2Vla18xICAgICA1ICAgOCAgIDcgICA3ICAgNiAgICA3ICAgOFxud2Vla18yICAgICA4ICAgOCAgIDggICA4ICAgOCAgICA4ICAgOFxuIn0= -->
-<pre><code>       thurs fri sat sun mon tues wed
-week_1     5   8   7   7   6    7   8
-week_2     8   8   8   8   8    8   8</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>#Question 4</p>
-<p>#i</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud2VhdGhlcl90d29fd2Vla1tcIndlZWtfMlwiLCBcInNhdFwiXVxuYGBgIn0= -->
-<pre class="r"><code>weather_two_week[&quot;week_2&quot;, &quot;sat&quot;]</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDhcbiJ9 -->
-<pre><code>[1] 8</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>#ii</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud2VhdGhlcl90d29fd2Vla1tcIndlZWtfMlwiLCBdXG5gYGAifQ== -->
-<pre class="r"><code>weather_two_week[&quot;week_2&quot;, ]</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoidGh1cnMgICBmcmkgICBzYXQgICBzdW4gICBtb24gIHR1ZXMgICB3ZWQgXG4gICAgOCAgICAgOCAgICAgOCAgICAgOCAgICAgOCAgICAgOCAgICAgOCBcbiJ9 -->
-<pre><code>thurs   fri   sat   sun   mon  tues   wed 
-    8     8     8     8     8     8     8 </code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>#iii</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud2VhdGhlcl90d29fd2Vla1ssIGMoXCJ0aHVyc1wiLCBcInNhdFwiLCBcInN1blwiKV1cbmBgYCJ9 -->
-<pre class="r"><code>weather_two_week[, c(&quot;thurs&quot;, &quot;sat&quot;, &quot;sun&quot;)]</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgIHRodXJzIHNhdCBzdW5cbndlZWtfMSAgICAgNSAgIDcgICA3XG53ZWVrXzIgICAgIDggICA4ICAgOFxuIn0= -->
-<pre><code>       thurs sat sun
-week_1     5   7   7
-week_2     8   8   8</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>#Question 5</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9ybWF0X2NoYXIgPC0gZnVuY3Rpb24oeCl7XG4gIHJldHVybihzdHJfYyhcIlRoZSBhbnN3ZXIgaXMgXCIsIHgpKVxufVxuYGBgIn0= -->
-<pre class="r"><code>format_char &lt;- function(x){
-  return(str_c(&quot;The answer is &quot;, x))
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaXNfbGVhcF95ZWFyIDwtIGZ1bmN0aW9uKHllYXIpe1xuICBpZiAoeWVhciAlJSAxMDAgPT0gMCl7XG4gICAgaWYgKHllYXIgJSUgNDAwID09IDApe1xuICAgICAgcmV0dXJuKFRSVUUpXG4gICAgfSBlbHNle1xuICAgICAgcmV0dXJuKEZBTFNFKVxuICAgIH1cbiAgfSBcbiAgaWYgKHllYXIgJSUgNCA9PSAwKXtcbiAgICByZXR1cm4oVFJVRSlcbiAgfSBlbHNlIHtcbiAgICByZXR1cm4oRkFMU0UpXG4gIH1cbn1cbmBgYCJ9 -->
+<pre class="r"><code>is_leap_year &lt;- function(year){
+  if (year %% 100 == 0){
+    if (year %% 400 == 0){
+      return(TRUE)
+    } else{
+      return(FALSE)
+    }
+  } 
+  if (year %% 4 == 0){
+    return(TRUE)
+  } else {
+    return(FALSE)
+  }
 }</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9ybWF0X251bSA8LSBmdW5jdGlvbih4KXtcbiAgaWYgKHggPCAxMCl7XG4gIHJldHVybih4KVxufVxuXG5pZiAoeCA+IDEwKXtcbiAgcmV0dXJuKHgvMTApXG59ICBcbiAgfVxuXG5gYGAifQ== -->
-<pre class="r"><code>format_num &lt;- function(x){
-  if (x &lt; 10){
-  return(x)
-}
-
-if (x &gt; 10){
-  return(x/10)
-}  
-  }
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaXNfbGVhcF95ZWFyKDIwMDApXG5gYGAifQ== -->
+<pre class="r"><code>is_leap_year(2000)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFRSVUVcbiJ9 -->
+<pre><code>[1] TRUE</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0ZXN0dGhhdClcblxuYGBgIn0= -->
+<pre class="r"><code>library(testthat)
 </code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9ybWF0X3F1ZXN0aW9uX2ZpdmUgPC0gZnVuY3Rpb24oeCl7XG4gIGlmIChpcy5jaGFyYWN0ZXIoeCkpe1xuICAgIHJldHVybihmb3JtYXRfY2hhcih4KSlcbiAgfVxuICBcbiAgaWYgKGlzLm51bWVyaWMoeCkpe1xuICAgIHJldHVybihmb3JtYXRfbnVtKHgpKVxuICB9ICBcbiAgZWxzZSBcbiAgICBwcmludChcIkludmFsaWQgaW5wdXRcIilcbiAgXG59XG5gYGAifQ== -->
-<pre class="r"><code>format_question_five &lt;- function(x){
-  if (is.character(x)){
-    return(format_char(x))
-  }
-  
-  if (is.numeric(x)){
-    return(format_num(x))
-  }  
-  else 
-    print(&quot;Invalid input&quot;)
-  
-}</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>#Shortening the answer to Question 5</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9ybWF0X3F1ZXN0aW9uX2ZpdmUgPC0gZnVuY3Rpb24oeCl7XG4gIGlmIChpcy5jaGFyYWN0ZXIoeCkpe1xuICAgIHJldHVybihzdHJfYyhcIlRoZSBhbnN3ZXIgaXMgXCIsIHgpKVxuICB9XG4gIFxuICBpZiAoaXMubnVtZXJpYyh4KSl7XG4gICAgaWYgKHggPCAxMCl7XG4gICAgcmV0dXJuKHgpXG4gIH0gIFxuICBpZiAoeCA+IDEwKXtcbiAgICByZXR1cm4oeC8xMClcbiAgfVxuICB9XG4gIGVsc2V7XG4gICAgcHJpbnQoXCJJbnZhbGlkIElucHV0XCIpXG4gIH1cbiAgXG59XG5gYGAifQ== -->
-<pre class="r"><code>format_question_five &lt;- function(x){
-  if (is.character(x)){
-    return(str_c(&quot;The answer is &quot;, x))
-  }
-  
-  if (is.numeric(x)){
-    if (x &lt; 10){
-    return(x)
-  }  
-  if (x &gt; 10){
-    return(x/10)
-  }
-  }
-  else{
-    print(&quot;Invalid Input&quot;)
-  }
-  
-}</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9ybWF0X3F1ZXN0aW9uX2ZpdmUoNTY3ODc2NTQxMjM0NTY3ODk4NzY1NDMpXG5cbmBgYCJ9 -->
-<pre class="r"><code>format_question_five(56787654123456789876543)
-</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDUuNjc4NzY1ZSsyMVxuIn0= -->
-<pre><code>[1] 5.678765e+21</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoicGFja2FnZSDigJh0ZXN0dGhhdOKAmSB3YXMgYnVpbHQgdW5kZXIgUiB2ZXJzaW9uIDMuNi4yXG4ifQ== -->
+<pre><code>package ‘testthat’ was built under R version 3.6.2</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>#Question 6</p>
-<p>#Didn’t quite get this one, my attempt below</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9ybWF0X3F1ZXN0aW9uX3NpeCA8LSBmdW5jdGlvbih4LCB5KXtcbiAgaWYgKHggPT0geSlcbiAgcHJpbnQoXCJFeGFjdGx5IHRoZSBzYW1lXCIpXG59XG4gIGlmICh4ID0geSlcbmBgYCJ9 -->
-<pre class="r"><code>format_question_six &lt;- function(x, y){
-  if (x == y)
-  print(&quot;Exactly the same&quot;)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYSA8LSAxMFxuZXhwZWN0X2VxdWFsKGEsIDExKVxuYGBgIn0= -->
+<pre class="r"><code>a &lt;- 10
+expect_equal(a, 11)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3I6IGBhYCBub3QgZXF1YWwgdG8gMTEuXG4xLzEgbWlzbWF0Y2hlc1xuWzFdIDEwIC0gMTEgPT0gLTFcbiJ9 -->
+<pre><code>Error: `a` not equal to 11.
+1/1 mismatches
+[1] 10 - 11 == -1</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdF90aGF0KFwiUmVhbCBsZWFwIHllYXJzIHJldHVybiB0cnVlIHZhbHVlc1wiLCB7XG4gIGV4cGVjdF9lcXVhbChpc19sZWFwX3llYXIoMjAyMCksIFRSVUUpXG59XG4pXG5gYGAifQ== -->
+<pre class="r"><code>test_that(&quot;Real leap years return true values&quot;, {
+  expect_equal(is_leap_year(2020), TRUE)
 }
-  if (x = y)</code></pre>
+)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3I6IHVuZXhwZWN0ZWQgJz0nIGluIFwiICBpZiAoeCA9XCJcbiJ9 -->
-<pre><code>Error: unexpected &#39;=&#39; in &quot;  if (x =&quot;</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiVGVzdCBwYXNzZWQg8J+OiVxuIn0= -->
+<pre><code>Test passed 🎉</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>#Steph’s answer</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9ybWF0X3F1ZXN0aW9uX3NpeCA8LSBmdW5jdGlvbih2ZWN0b3JfMSwgdmVjdG9yXzIpe1xuICBpZiAoYWxsKHZlY3Rvcl8xID09IHZlY3Rvcl8yKSkge1xuICAgIHJldHVybihcIkV4YWN0bHkgdGhlIHNhbWVcIilcbiAgfVxuICBcbiAgaWYgKGFsbChzb3J0KHZlY3Rvcl8xKSA9PSBzb3J0KHZlY3Rvcl8yKSlcbiAgcmV0dXJuKFwiVGhlIHNhbWVcIilcbmBgYCJ9 -->
-<pre class="r"><code>format_question_six &lt;- function(vector_1, vector_2){
-  if (all(vector_1 == vector_2)) {
-    return(&quot;Exactly the same&quot;)
-  }
-  
-  if (all(sort(vector_1) == sort(vector_2))
-  return(&quot;The same&quot;)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdF90aGF0KFwiQ2hhcmFjdGVyIGlucHV0IHJldHVybnMgYW4gZXJyb3JcIiwge1xuICBleHBlY3RfZXJyb3IoaXNfbGVhcF95ZWFyKFwieWVhclwiKSlcbn0pXG5gYGAifQ== -->
+<pre class="r"><code>test_that(&quot;Character input returns an error&quot;, {
+  expect_error(is_leap_year(&quot;year&quot;))
+})</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3I6IHVuZXhwZWN0ZWQgc3ltYm9sIGluOlxuXCIgIGlmIChhbGwoc29ydCh2ZWN0b3JfMSkgPT0gc29ydCh2ZWN0b3JfMikpXG4gIHJldHVyblwiXG4ifQ== -->
-<pre><code>Error: unexpected symbol in:
-&quot;  if (all(sort(vector_1) == sort(vector_2))
-  return&quot;</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiVGVzdCBwYXNzZWQg8J+YuFxuIn0= -->
+<pre><code>Test passed 😸</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdF90aGF0KFwiTm9uLW51bWVyaWMgaW5wdXQgcmV0dXJucyBhbiBlcnJvclwiLCB7XG4gIGV4cGVjdF9lcnJvcihpc19sZWFwX3llYXIoXCJ5ZWFyXCIpKVxuICBleHBlY3RfZXJyb3IoaXNfbGVhcF95ZWFyKFRSVUUpKVxufSlcbmBgYCJ9 -->
+<pre class="r"><code>test_that(&quot;Non-numeric input returns an error&quot;, {
+  expect_error(is_leap_year(&quot;year&quot;))
+  expect_error(is_leap_year(TRUE))
+})</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoi4pSA4pSAIEZhaWx1cmUgKExpbmUgMyk6IE5vbi1udW1lcmljIGlucHV0IHJldHVybnMgYW4gZXJyb3Ig4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXG5gaXNfbGVhcF95ZWFyKFRSVUUpYCBkaWQgbm90IHRocm93IGFuIGVycm9yLlxuIn0= -->
+<pre><code>── Failure (Line 3): Non-numeric input returns an error ─────────────────────────────────────────────────────────────────────────────────────────
+`is_leap_year(TRUE)` did not throw an error.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Build up tests carefully. If putting them all in one, run individually first</p>
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQpgYGB7cn0KbGlicmFyeSh0aWR5dmVyc2UpCmBgYAoKCgpIb21ld29yawoKI1F1ZXN0aW9uIDEKCmBgYHtyfQp3ZWF0aGVyIDwtIGxpc3QoCiAgIlRodXJzZGF5IiA9IGxpc3QodGVtcF9DID0gNCwgY2hhbmNlX29mX3JhaW4gPSAyMCwgd2luZF9zcGVlZF9tcGggPSA5KSwKICAiRnJpZGF5IiA9IGxpc3QodGVtcF9DID0gNywgY2hhbmNlX29mX3JhaW4gPSA5MCwgd2luZF9zcGVlZF9tcGggPSAxOCksCiAgIlNhdHVyZGF5IiA9IGxpc3QodGVtcCA9IDYsIGNoYW5jZV9vZl9yYWluID0gNzAsIHdpbmRfc3BlZWRfbXBoID0gMTApCikKCndlYXRoZXIKYGBgCgoKI1F1ZXN0aW9uIDIKCiNpCmBgYHtyfQp3ZWF0aGVyJFRodXJzZGF5JGNoYW5jZV9vZl9yYWluCmBgYAojaWkKYGBge3J9CndlYXRoZXIkRnJpZGF5JHdpbmRfc3BlZWQKYGBgCiNpaWkKYGBge3J9CndlYXRoZXIkVGh1cnNkYXkkdGVtcF9DCmBgYAoKCiNRdWVzdGlvbiAzCgoKYGBge3J9CndlYXRoZXJfdHdvX3dlZWsgPC0KICBtYXRyaXgoYyg1LCA4LCA3LCA3LCA2LCA3LCA4LCA4LCA4LCA4LCA4LCA4LCA4LCA4KSwgbnJvdyA9IDIsIG5jb2wgPSA3LCBieXJvdyA9IFRSVUUpCnJvd25hbWVzKHdlYXRoZXJfdHdvX3dlZWspIDwtIGMoIndlZWtfMSIsICJ3ZWVrXzIiKQpjb2xuYW1lcyh3ZWF0aGVyX3R3b193ZWVrKSA8LSBjKCJ0aHVycyIsICJmcmkiLCAic2F0IiwgInN1biIsIm1vbiIsICJ0dWVzIiwgIndlZCIpCndlYXRoZXJfdHdvX3dlZWsKYGBgCgoKI1F1ZXN0aW9uIDQKCiNpCmBgYHtyfQp3ZWF0aGVyX3R3b193ZWVrWyJ3ZWVrXzIiLCAic2F0Il0KYGBgCgojaWkKYGBge3J9CndlYXRoZXJfdHdvX3dlZWtbIndlZWtfMiIsIF0KYGBgCgojaWlpCmBgYHtyfQp3ZWF0aGVyX3R3b193ZWVrWywgYygidGh1cnMiLCAic2F0IiwgInN1biIpXQpgYGAKCgojUXVlc3Rpb24gNQoKYGBge3J9CmxpYnJhcnkoc3RyaW5ncikKYGBgCgpgYGB7cn0KZm9ybWF0X2NoYXIgPC0gZnVuY3Rpb24oeCl7CiAgcmV0dXJuKHN0cl9jKCJUaGUgYW5zd2VyIGlzICIsIHgpKQp9CmBgYAoKYGBge3J9CmZvcm1hdF9udW0gPC0gZnVuY3Rpb24oeCl7CiAgaWYgKHggPCAxMCl7CiAgcmV0dXJuKHgpCn0KCmlmICh4ID4gMTApewogIHJldHVybih4LzEwKQp9ICAKICB9CgpgYGAKCmBgYHtyfQpmb3JtYXRfcXVlc3Rpb25fZml2ZSA8LSBmdW5jdGlvbih4KXsKICBpZiAoaXMuY2hhcmFjdGVyKHgpKXsKICAgIHJldHVybihmb3JtYXRfY2hhcih4KSkKICB9CiAgCiAgaWYgKGlzLm51bWVyaWMoeCkpewogICAgcmV0dXJuKGZvcm1hdF9udW0oeCkpCiAgfSAgCiAgZWxzZSAKICAgIHByaW50KCJJbnZhbGlkIGlucHV0IikKICAKfQpgYGAKCiNTaG9ydGVuaW5nIHRoZSBhbnN3ZXIgdG8gUXVlc3Rpb24gNQoKYGBge3J9CmZvcm1hdF9xdWVzdGlvbl9maXZlIDwtIGZ1bmN0aW9uKHgpewogIGlmIChpcy5jaGFyYWN0ZXIoeCkpewogICAgcmV0dXJuKHN0cl9jKCJUaGUgYW5zd2VyIGlzICIsIHgpKQogIH0KICAKICBpZiAoaXMubnVtZXJpYyh4KSl7CiAgICBpZiAoeCA8IDEwKXsKICAgIHJldHVybih4KQogIH0gIAogIGlmICh4ID4gMTApewogICAgcmV0dXJuKHgvMTApCiAgfQogIH0KICBlbHNlewogICAgcHJpbnQoIkludmFsaWQgSW5wdXQiKQogIH0KICAKfQpgYGAKCmBgYHtyfQpmb3JtYXRfcXVlc3Rpb25fZml2ZSg1Njc4NzY1NDEyMzQ1Njc4OTg3NjU0MykKYGBgCgoKI1F1ZXN0aW9uIDYKCiNEaWRuJ3QgcXVpdGUgZ2V0IHRoaXMgb25lLCBteSBhdHRlbXB0IGJlbG93CgpgYGB7cn0KZm9ybWF0X3F1ZXN0aW9uX3NpeCA8LSBmdW5jdGlvbih4LCB5KXsKICBpZiAoeCA9PSB5KQogIHByaW50KCJFeGFjdGx5IHRoZSBzYW1lIikKfQogIGlmICh4ID0geSkKICBwcmludCgiVGhlIHNhbWUiKQp9CgogIApgYGAKI1N0ZXBoJ3MgYW5zd2VyCgpgYGB7cn0KZm9ybWF0X3F1ZXN0aW9uX3NpeCA8LSBmdW5jdGlvbih2ZWN0b3JfMSwgdmVjdG9yXzIpewogIGlmIChhbGwodmVjdG9yXzEgPT0gdmVjdG9yXzIpKSB7CiAgICByZXR1cm4oIkV4YWN0bHkgdGhlIHNhbWUiKQogIH0KICAKICBpZiAoYWxsKHNvcnQodmVjdG9yXzEpID09IHNvcnQodmVjdG9yXzIpKQogIHJldHVybigiVGhlIHNhbWUiKQogICAgCn0KICByZXR1cm4oIkRpZmZlcmVudCIpCn0KICAKICAKYGBgCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQpgYGB7cn0KaXNfbGVhcF95ZWFyIDwtIGZ1bmN0aW9uKHllYXIpewogIGlmICh5ZWFyICUlIDEwMCA9PSAwKXsKICAgIGlmICh5ZWFyICUlIDQwMCA9PSAwKXsKICAgICAgcmV0dXJuKFRSVUUpCiAgICB9IGVsc2V7CiAgICAgIHJldHVybihGQUxTRSkKICAgIH0KICB9IAogIGlmICh5ZWFyICUlIDQgPT0gMCl7CiAgICByZXR1cm4oVFJVRSkKICB9IGVsc2UgewogICAgcmV0dXJuKEZBTFNFKQogIH0KfQpgYGAKCgoKYGBge3J9CmlzX2xlYXBfeWVhcigyMDAwKQpgYGAKCmBgYHtyfQpsaWJyYXJ5KHRlc3R0aGF0KQpgYGAKCgoKYGBge3J9CmEgPC0gMTAKZXhwZWN0X2VxdWFsKGEsIDExKQpgYGAKCgpgYGB7cn0KdGVzdF90aGF0KCJSZWFsIGxlYXAgeWVhcnMgcmV0dXJuIHRydWUgdmFsdWVzIiwgewogIGV4cGVjdF9lcXVhbChpc19sZWFwX3llYXIoMjAyMCksIFRSVUUpCn0KKQpgYGAKCgoKCmBgYHtyfQp0ZXN0X3RoYXQoIkNoYXJhY3RlciBpbnB1dCByZXR1cm5zIGFuIGVycm9yIiwgewogIGV4cGVjdF9lcnJvcihpc19sZWFwX3llYXIoInllYXIiKSkKfSkKYGBgCgoKCmBgYHtyfQp0ZXN0X3RoYXQoIk5vbi1udW1lcmljIGlucHV0IHJldHVybnMgYW4gZXJyb3IiLCB7CiAgZXhwZWN0X2Vycm9yKGlzX2xlYXBfeWVhcigieWVhciIpKQogIGV4cGVjdF9lcnJvcihpc19sZWFwX3llYXIoVFJVRSkpCn0pCmBgYApCdWlsZCB1cCB0ZXN0cyBjYXJlZnVsbHkuIElmIHB1dHRpbmcgdGhlbSBhbGwgaW4gb25lLCBydW4gaW5kaXZpZHVhbGx5IGZpcnN0CgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoK</div>
 
 
 
@@ -2089,7 +1940,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("Programming in R homework.Rmd");
+  window.initializeSourceEmbed("Untitled.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>

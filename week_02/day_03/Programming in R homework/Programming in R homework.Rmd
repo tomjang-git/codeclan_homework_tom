@@ -133,7 +133,7 @@ format_question_five <- function(x){
 ```
 
 ```{r}
-format_question_five("k;asdhfaksdjfh")
+format_question_five(56787654123456789876543)
 ```
 
 
@@ -150,6 +150,23 @@ format_question_six <- function(x, y){
   print("The same")
 }
 
+  
+```
+#Steph's answer
+
+```{r}
+format_question_six <- function(vector_1, vector_2){
+  if (all(vector_1 == vector_2)) {
+    return("Exactly the same")
+  }
+  
+  if (all(sort(vector_1) == sort(vector_2))
+  return("The same")
+    
+}
+  return("Different")
+}
+  
   
 ```
 

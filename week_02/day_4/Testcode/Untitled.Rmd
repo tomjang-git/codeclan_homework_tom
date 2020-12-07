@@ -1,0 +1,228 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r}
+is_leap_year <- function(year){
+  if (year %% 100 == 0){
+    if (year %% 400 == 0){
+      return(TRUE)
+    } else{
+      return(FALSE)
+    }
+  } 
+  if (year %% 4 == 0){
+    return(TRUE)
+  } else {
+    return(FALSE)
+  }
+}
+```
+
+
+
+```{r}
+is_leap_year(2000)
+```
+
+```{r}
+library(testthat)
+```
+
+
+
+```{r}
+a <- 10
+expect_equal(a, 11)
+```
+
+
+```{r}
+test_that("Real leap years return true values", {
+  expect_equal(is_leap_year(2020), TRUE)
+}
+)
+```
+
+
+
+
+```{r}
+test_that("Character input returns an error", {
+  expect_error(is_leap_year("year"))
+})
+```
+
+
+
+```{r}
+test_that("Non-numeric input returns an error", {
+  expect_error(is_leap_year("year"))
+  expect_error(is_leap_year(TRUE))
+})
+```
+Build up tests carefully. If putting them all in one, run individually first
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
