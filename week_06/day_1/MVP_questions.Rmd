@@ -1,0 +1,185 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+library(prob)
+library(gtools)
+library(tidyverse)
+```
+
+
+```{r}
+rolldie(1) %>% 
+  dplyr::filter(X1 < 5)
+
+#4/6 = 0.666666667
+```
+
+```{r}
+rolldie(3) %>% 
+summarise(X1 = n())
+```
+
+
+```{r}
+total_equals_5_6_7 <- c(5, 6, 7)
+```
+
+```{r}
+total_equals_5_6_7 <
+```
+
+
+```{r}
+#finding the number of rolls totalling 5 to 7
+rolldie(4) %>% 
+  mutate(total = X1 + X2 + X3 + X4) %>% 
+  filter(total >= 5 & total <= 7)
+
+#finding the total number of possible rolls
+rolldie(4)
+
+#dividing the former by the latter
+34/1296
+
+#Assumption: that there could be multiple versions of the same roll. 
+
+```
+
+```{r}
+height_in_order <- c("a", "b", "c", "d", "e")
+```
+#all i need to know is there there is a single unique sequence that works in a scenario where people are sat in order in a single direction (otherwise there would be two). I can abstract that to the vector created above. 
+
+```{r}
+permutations(
+  n = 5,
+  r = 5,
+  v = height_in_order
+) %>% 
+  as_tibble
+```
+
+```{r}
+#chance of the event described in the quesion:
+1/120
+```
+
+
+
+
+
+```{r}
+rolldie(6)
+
+permutations(
+  n = 6,
+  r = 6
+) %>% 
+  as_tibble
+
+#permutations allow for same group to be sequenced differently across the board, but will not allow repeats of any variable unless specifically requested to do so with repeats.allowed.
+
+#i. the odds of seeing that specific sequence is 1 in all of the possible sequences of 6 dice rolls. So 1/46656 = 0.00002143347 (below)
+
+options(scipen = 999)
+1/46656
+
+#ii. the odds of it being any instance of rolls where no number shows up twice is the permutation calculation above divided by the total number of possible rolls. So 720/46656 = 0.0154321 (below) 
+
+720/46656
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+rolldie(2) %>% 
+  mutate(
+    first_die_even = rowSums(. %% 2 == 0)
+  ) %>% 
+  dplyr::filter(first_die_even == 0)
+
+9/36
+```
+
+```{r}
+permutations(
+  n = 10,
+  r = 3,
+  v = employees
+) %>% 
+  as_tibble %>% 
+  purrr::set_names(c("CEO", "CTO", "COO")) %>% 
+  filter(CEO == "Alice" & CTO == "Bob")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

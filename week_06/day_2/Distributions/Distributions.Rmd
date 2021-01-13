@@ -1,0 +1,123 @@
+---
+title: "Distributions Homework"
+output: html_notebook
+---
+#1.1 load clean and explore
+```{r}
+library(tidyverse)
+library(dplyr)
+library(janitor)
+library(prob)
+library(lubridate)
+```
+
+```{r}
+amazon_phones <-
+read_csv("data/20190928-items.csv") %>% 
+  clean_names()
+
+amazon_phones
+```
+
+
+
+
+#1.2 find brand with highest number of phones in dataset
+
+
+```{r}
+#using function we made in class:
+
+get_mode <- function(data){
+  tabled_data <- table(data)
+  table_names <- names(tabled_data)
+   return( table_names[tabled_data == max(tabled_data)] )
+}
+
+amazon_phones %>% 
+  summarise(brand_mode = get_mode(brand)) 
+
+
+#OR this will not just show us the mode, but exactly how many times it appears and everything the follows in terms of frequency.
+
+
+amazon_phones %>% 
+  group_by(brand) %>% 
+  tally() %>% 
+  arrange(desc(n))
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

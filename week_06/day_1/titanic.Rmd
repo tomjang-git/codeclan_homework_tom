@@ -1,0 +1,144 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+library(prob)
+library(gtools)
+library(tidyverse)
+```
+
+
+```{r}
+titanic <-
+  read_csv("data/titanic.csv")
+titanic
+```
+
+
+
+```{r}
+titanic %>% 
+  dplyr::count()
+```
+```{r}
+titanic$class %>% 
+  unique()
+```
+
+
+```{r}
+titanic %>% 
+  filter(class == "1st" | class == "2nd" | class == "3rd") %>% 
+  filter(survived == "yes") %>% 
+  dplyr::count()
+```
+```{r}
+titanic %>% 
+  filter(class == "1st" | class == "2nd" | class == "3rd") %>% 
+  filter(survived == "no") %>% 
+  dplyr::count()
+```
+#500 passengers survived, 817 didn't. Add the two figures up for 1317. Total odds for survival therefore are 500/1317.
+```{r}
+500/1317
+```
+
+
+
+
+
+
+```{r}
+titanic %>% 
+  filter(class == "deck crew" | class == "victualling crew" | class == "engineering crew" | class == "restaurant staff" ) %>% 
+  filter(survived == "yes") %>% 
+  dplyr::count()
+```
+
+```{r}
+titanic %>% 
+  filter(class == "deck crew" | class == "victualling crew" | class == "engineering crew" | class == "restaurant staff" ) %>% 
+  filter(survived == "no") %>% 
+  dplyr::count()
+```
+#211 survived, 679 didn't. Add the two figures up for 890 Total odds for survival therefore are 211/890.
+
+```{r}
+211/890
+```
+
+#Passengers had 0.3796507 of surviving, crew had 0.2370787. Passengers had better odds.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

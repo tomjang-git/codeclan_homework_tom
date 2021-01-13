@@ -1,0 +1,692 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+#1 MVP
+#This is a mini homework for people doing the PDA. You are going to continue working on your week 2 weekend homework.
+
+#We want you to use the skills you have learnt this week to visualise your meteorite data. We do not need anything fancy - just a simple plot that illustrates part of your cleaned data.
+
+
+
+
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+```
+
+1.2.1
+
+```{r}
+meteorite_landings_clean <-
+  read_csv("data/meteorite_landings_clean.csv")
+```
+
+
+```{r}
+ggplot(meteorite_landings_clean) +
+  aes(x = year, y = mass_in_grams) +
+  geom_line() +
+  labs(x = "\n Year",
+       y = "\n Mass In Grams") 
+```
+```{r}
+ggplot(meteorite_landings_clean_over_10_mil) +
+  aes(x = year, y = mass_in_grams, colour = fall_status) +
+  geom_line() +
+  geom_point() +
+  scale_y_continuous(labels = scales::comma) +
+  ggtitle("Meteor weight by year, split by fall status") +
+  labs(mass_in_grams = "Mass in Grams")
+```
+
+```{r}
+ggplot(meteorite_landings_clean_under_10_mil_last_twenty_years) +
+  aes(x = year, y = mass_in_grams, colour = fall_status) +
+  geom_line() +
+  geom_point() +
+  scale_y_continuous(labels = scales::comma) +
+  ggtitle("Meteor weight by year, split by fall status") +
+  labs(mass_in_grams = "Mass in Grams")
+```
+
+
+
+
+```{r}
+meteorite_landings_clean_under_10_mil <-
+  meteorite_landings_clean %>% 
+  filter(mass_in_grams < 10000000)
+```
+
+```{r}
+meteorite_landings_clean_over_10_mil <-
+  meteorite_landings_clean %>% 
+  filter(mass_in_grams > 10000000)
+```
+
+
+```{r}
+meteorite_landings_clean_under_10_mil_last_hundred_years <-
+  meteorite_landings_clean %>% 
+  filter(mass_in_grams < 10000000) %>% 
+  filter(year > 1921)
+```
+
+
+```{r}
+meteorite_landings_clean_under_10_mil_last_twenty_years <-
+  meteorite_landings_clean %>% 
+  filter(mass_in_grams < 10000000) %>% 
+  filter(year > 2001)
+```
+
+
+
+
+
+
+```{r}
+library(raster)
+library(rgdal)
+library(ggplot2)
+library(broom)
+library(RColorBrewer)
+library(rgeos)
+library(dplyr)
+library(tidyverse)
+```
+
+
+
+figure out how to divide the four corners by latitude and longitude
+add up the sum of each of the areas
+place on a bar chart
+
+
+
+```{r}
+meteorite_landings_clean %>% 
+  mutate(hemisphere = if_else(latitude > 0, "North", "South")) %>% 
+  head(mass_in_grams, 100)
+```
+```{r}
+meteorite_landings_clean_top_100 <-
+meteorite_landings_clean_hemisphere %>% 
+  arrange(desc(mass_in_grams)) %>% 
+  head(100)
+```
+
+
+
+```{r}
+ggplot(meteorite_landings_clean_hemisphere) +
+  aes(x = year, y = mass_in_grams, colour = hemisphere) +
+  geom_point() +
+  scale_y_continuous(labels = scales::comma) +
+  ggtitle("Meteor weight by year, split by hemisphere") +
+  labs(mass_in_grams = "Mass in Grams")
+```
+
+
+
+```{r}
+ggplot(meteorite_landings_clean_hemisphere_over_1_tonne) +
+  aes(x = year, y = mass_in_grams, colour = hemisphere) +
+  geom_line() +
+  geom_point() +
+  scale_y_continuous(labels = scales::comma) +
+  ggtitle("Meteor weight by year, split by hemisphere") +
+  labs(mass_in_grams = "Mass in Grams")
+```
+
+
+
+```{r}
+meteorite_landings_clean_hemisphere <-
+meteorite_landings_clean %>% 
+  mutate(hemisphere = if_else(latitude > 0, "North", "South"))
+```
+
+
+```{r}
+meteorite_landings_clean_top_100 <-
+meteorite_landings_clean_hemisphere %>% 
+  arrange(desc(mass_in_grams)) %>% 
+  head(100)
+```
+
+
+```{r}
+ggplot(meteorite_landings_clean_top_100) +
+  aes(x = year, y = mass_in_grams, colour = hemisphere) +
+  geom_point() +
+  geom_line() +
+  scale_y_continuous(labels = scales::comma) +
+  ggtitle("100 Largest Meteors By Year, Split By Hemisphere") +
+  labs(y = "\n Mass in Grams",
+       x = "\n Year",
+       colour = "Hemisphere") +
+  scale_colour_manual(breaks = c("North", "South"),
+                      values = c("darkblue", "red"))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

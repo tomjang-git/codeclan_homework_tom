@@ -1,0 +1,83 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+
+#reading in data
+
+```{r}
+meteorite_landings_clean <-
+  read_csv("data/meteorite_landings_clean.csv")
+```
+
+#creating a new column that indicates if the meteor was found in the Northern or Southern Hemisphere
+
+```{r}
+meteorite_landings_clean_hemisphere <-
+meteorite_landings_clean %>% 
+  mutate(hemisphere = if_else(latitude > 0, "North", "South"))
+```
+
+
+#taking the top 100 heaviest meteorites to prevent visual clutter
+
+```{r}
+meteorite_landings_clean_top_100 <-
+meteorite_landings_clean_hemisphere %>% 
+  arrange(desc(mass_in_grams)) %>% 
+  head(100)
+```
+
+
+
+```{r}
+#calling in ggplot function
+ggplot(meteorite_landings_clean_top_100) +
+#setting the axes and the split between hemispheres
+  aes(x = year, y = mass_in_grams, colour = hemisphere) +
+#choosing the types of graph
+  geom_point() +
+  geom_line() +
+#changing presentation of numbers on Y axis from "e" numbers to natural numbers
+  scale_y_continuous(labels = scales::comma) +
+#renaming and labels 
+  ggtitle("100 Largest Meteors By Year, Split By Hemisphere") +
+  labs(y = "\n Mass in Grams",
+       x = "\n Year",
+       colour = "Hemisphere") +
+#changing colour of both hemispheres so that they are more distinguishable
+  scale_colour_manual(breaks = c("North", "South"),
+                      values = c("darkblue", "red"))
+#the data could be telling us a couple of things- that larger meteors tend to hit the Northern Hemisphere more, or that there were more active attempts to discover them in the hotbeds of scientific activity during the 18 and 1900's, or that the groups who recorded this type of data were typically based in the Northern Hemisphere, and so recorded more discoveries there.
+```
+
+
+```{r}
+#calling in ggplot function
+ggplot(meteorite_landings_clean_hemisphere) +
+#setting the axes and the split between hemispheres
+  aes(x = year, y = mass_in_grams, colour = hemisphere) +
+#choosing the types of graph
+  geom_point() +
+  geom_line() +
+#changing presentation of numbers on Y axis from "e" numbers to natural numbers
+  scale_y_continuous(labels = scales::comma) +
+#renaming and labels 
+  ggtitle("100 Largest Meteors By Year, Split By Hemisphere") +
+  labs(y = "\n Mass in Grams",
+       x = "\n Year",
+       colour = "Hemisphere") +
+#changing colour of both hemispheres so that they are more distinguishable
+  scale_colour_manual(breaks = c("North", "South"),
+                      values = c("darkblue", "red"))
+#the data could be telling us a couple of things- that larger meteors tend to hit the Northern Hemisphere more, or that there were more active attempts to discover them in the hotbeds of scientific activity during the 18 and 1900's, or that the groups who recorded this type of data were typically based in the Northern Hemisphere, and so recorded more discoveries there.
+```
+
+
+
+
+
+
+

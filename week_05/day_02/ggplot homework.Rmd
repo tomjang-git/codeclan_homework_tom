@@ -21,7 +21,17 @@ backpack
 ```{r}
 ggplot(backpack) +
   aes(x = backpack_weight) +
-  geom_bar()
+  geom_bar() +
+  labs(y = "Backpack count", x = "Backpack Weight")
+
+```
+
+```{r}
+ggplot(backpack) +
+  aes(x = backpack_weight) +
+  geom_histogram(bins = 20, fill = "turquoise") +
+  labs(y = "Backpack count", x = "Backpack Weight") +
+  scale_x_continuous(breaks = seq(from = 0, to = 35, by = 2))
 
 ```
 
@@ -70,8 +80,7 @@ backpack %>%
 ggplot(backpack) +
   aes(x = back_problems, fill = sex) +
   geom_bar(position = "dodge") +
-  scale_y_continuous(labels = scales :: percent) +
-  ylab("relative frequencies")
+  scale_y_continuous(labels = scales :: percent)
 ```
 
 
