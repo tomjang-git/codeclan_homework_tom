@@ -1,0 +1,211 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+1 MVP
+
+1.1 Hypothesis testing - practical
+
+#You work for an animal conservation organisation and are looking to do some investigating into some of the animals to provide evidence for some projects you are looking to run.
+
+#In this homework we’ll use the msleep data set provided in the ggplot package. It concerns the sleeping patterns of various types of mammal.
+
+
+#Explore the dataset and familiarise yourself with it.
+
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(janitor)
+library(infer)
+library(fastGraph)
+```
+
+
+```{r}
+msleep <- msleep %>% 
+  clean_names()
+
+msleep
+
+msleep <-
+msleep %>% 
+  add_row(name = "Jabberwocky", sleep_total = 7)
+```
+
+
+```{r}
+
+```
+
+
+
+
+#Jabberwockies sleep for around 7 hours a night, on average. Perform an appropriate statistical test to determine whether the mean sleep_total in the sampled population of animal types differs from the typical value for jabberwockies.
+
+Do animals have a mean(sleep_total) significantly different from 3.96?
+
+α level: 0.05
+
+H0: the mean of sleep_total in the msleep dataframe does NOT differ from the average 7 hours that Jabberwockies spend sleeping   (μsleep_total_mean = 7)
+Ha: the mean of sleep_total in the msleep dataframe DOES differ from the average 7 hours that Jabberwockies spend sleeping (μsleep_total_mean ≠ 7)
+
+```{r}
+#simulating a sample of the animals, using replace to generate more samples than there are in the df
+sample_200 <- msleep %>% 
+  rep_sample_n(size = 200, reps = 1, replace = TRUE)
+```
+
+```{r}
+sleep_total_mean <- sample_200 %>% 
+  summarise(mean_sleep_total = mean(sleep_total))
+
+sleep_total_mean
+```
+
+```{r}
+sleep_total_mean_jabberwocky <- sample_200 %>% 
+  filter(name == "Jabberwocky") %>% 
+  summarise(mean_sleep_total = mean(sleep_total)) 
+
+sleep_total_mean_jabberwocky
+```
+
+```{r}
+std_errs <- sample_200 %>% 
+  summarise(se_sleep_total_mean = sd(sleep_total_mean))
+
+std_errs
+```
+
+```{r}  
+null_distribution <- sample_200 %>% 
+  specify(response = sleep_total) %>% 
+  hypothesize(null = "point", mu = 7) %>% 
+  generate(reps = 1000, type = "bootstrap") %>% 
+  calculate(stat = "mean")
+
+null_distribution %>% 
+  visualise(bins = 30) +
+  shade_p_value(obs_stat = sleep_total_mean$mean_sleep_total, direction = "less")
+
+
+p_value_1 <- null_distribution %>% 
+  get_p_value(sleep_total_mean_jabberwocky, direction = "less")
+p_value_1
+
+
+#p value = 0, therefore we should reject the null hypothesis
+```
+
+
+
+
+#Perform an appropriate statistical test to determine whether omnivores sleep for significantly longer than herbivores, on average.
+
+```{r}
+sample_200
+```
+
+
+
+```{r}
+null_distribution_2 <- sample_200 %>% 
+  specify(sleep_total ~ vore) %>% 
+  hypothesize(null = "independence") %>% 
+  generate(reps = 1000, type = "permute") %>% 
+  calculate(stat = "diff in means", order = c("omni", "herbi"))
+
+null_distribution_2
+
+#I keep getting this error and I can't for the life of me figure out why it's doing that- haven't I already separated the variable into two levels by creating a vector?
+
+#Error: Statistic is based on a difference or ratio; the explanatory variableshould have two levels.
+
+```
+
+
+
+
+
+#Perform an appropriate statistical test to determine whether the proportion of domesticated animal types in the population of animal types is greater than 5%.
+#[Hint - think about creating an is_domesticated variable for the analysis]
+
+```{r}
+msleep <-
+msleep %>% 
+  mutate(is_domesticated = ifelse(conservation == "domesticated", "Yes", "No"))
+
+msleep
+```
+
+```{r}
+null_distribution_3 <- msleep %>% 
+  specify(name ~ is_domesticated) %>% 
+  hypothesize(null = "independence") %>% 
+  generate(reps = 5000, type = "permute") %>% 
+  calculate(stat = "diff in prop", order = c("Yes", "No"))
+
+null_distribution_3
+```
+
+
+
+
+
+1.2 Hypothesis Testing 
+
+1. Coffee shop
+
+H0:μawareness_of_shop > 0.4
+Ha:μawareness_of_shop < 0.4
+
+H0: over 40% percent of the people in the town know the coffee shop
+Ha: under 40% percent of the people in the town know the coffee shop
+
+I would use a permutation to generate the null distribution(?)
+
+
+
+2. Website A/B test
+
+
+
+
+H0: website users overall are more likely to click on the banner if positioned at the top of the page
+Ha: website users overall are less likely to click on the banner if positioned at the top of the page
+
+
+
+
+1.2.2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
