@@ -1,0 +1,155 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(janitor)
+
+```
+
+```{r}
+hb_geo_codes_14_19 <-
+  read_csv("raw_data/health_board_geography_codes_and_labels_2014_01042019.csv") %>% 
+  clean_names()
+
+hb_geo_codes_14_19
+
+
+health_board_incidences <-
+  read_csv("raw_data/opendata_inc9418_hb.csv") %>% 
+  clean_names()
+
+health_board_incidences
+
+region_incidences <-
+  read_csv("raw_data/opendata_inc9418_region.csv") %>% 
+  clean_names()
+
+region_incidences
+
+scotland_incidences <-
+  read_csv("raw_data/opendata_inc9418_scotland.csv") %>% 
+  clean_names() 
+
+scotland_incidences
+
+```
+
+
+So hb_geo_codes_14_19 is simply the health board codes for each of the health boards in scotland. I have to do join it to health_board_incidences and then filter for NHS Borders
+Or not even, just look up the hb code for NHS Borders in 1st and filter by that in the 2nd. 
+
+```{r}
+hb_geo_codes_14_19 %>% 
+  filter(hb_name == "NHS Borders")
+```
+
+
+```{r}
+health_board_incidences_Borders <-
+health_board_incidences %>% 
+  filter(hb == "S08000016") 
+
+health_board_incidences_Borders
+
+health_board_incidences_Borders %>% 
+  distinct(easr_upper95pc_confidence_interval)
+
+```
+
+Questions I can think to ask, off the bat:
+
+```{r}
+health_board_incidences_Borders %>% 
+  filter(sex == "All") %>% 
+  ggplot(aes(x = year, y = incidences_all_ages)) +
+  geom_line(color = "#800080") +
+  facet_wrap(~ cancer_site)
+```
+So off the bat here I'm seeing that All Cancer Types may be making this data less accessible.
+
+So I'm going to run the same code but filter out "All cancer types" to see what happens
+
+```{r}
+health_board_incidences_Borders %>% 
+  filter(sex == "All",
+         cancer_site != "All cancer types") %>% 
+  ggplot(aes(x = year, y = incidences_all_ages)) +
+  geom_line(color = "#800080") +
+  facet_wrap(~ cancer_site)
+```
+
+
+```{r}
+write_csv(health_board_incidences_Borders, "clean_data/health_board_incidences_Borders.csv")
+```
+
+
+
+
+```{r}
+cancers_1 <-
+unique(health_board_incidences_Borders$cancer_site)
+```
+
+
+```{r}
+cancers_1
+```
+
+```{r}
+health_board_incidences_Borders %>% 
+  filter(sex == "All",
+         cancer_site != "All cancer types") %>% 
+  ggplot(aes(x = year, y = incidences_all_ages)) +
+  geom_line(color = "#800080") + 
+  facet_wrap(~ cancer_site)
+```
+
+```{r}
+unique(health_board_incidences_Borders$sex)
+```
+
+
+
+```{r}
+health_board_incidences_Borders %>% 
+  filter(cancer_site == "Breast") %>% 
+  group_by(year)
+```
+
+
+```{r}
+health_board_incidences_Borders
+```
+
+
+```{r}
+health_board_incidences_Borders %>% 
+  tidyr::gather()
+  filter(sex == "All",
+         cancer_site != "All cancer types") %>% 
+  ggplot(aes(x = year, y = incidences_all_ages)) +
+  geom_line(color = "#800080") + 
+  facet_wrap(~ cancer_site)
+```
+
+```{r}
+unique(health_board_incidences_Borders$year)
+```
+
+
+```{r}
+
+```
+
+
+
+
+
+
+
+

@@ -1,0 +1,158 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(fable)
+library(tsibble)
+library(tsibbledata)
+library(lubridate)
+library(feasts)
+```
+
+
+```{r}
+beer_data <-
+aus_production %>% 
+  select(Quarter, Beer)
+```
+
+```{r}
+aus_production
+```
+
+
+```{r}
+beer_data %>% 
+  autoplot(Beer)
+```
+
+#fit a model
+
+```{r}
+library(urca)
+```
+
+```{r}
+#SNAIVE , MEAN, ARIMA
+
+fit <- beer_data %>% 
+  model(
+    snaive = SNAIVE(Beer),
+    mean = MEAN(Beer),
+    arima = ARIMA(Beer)
+  )
+
+fit
+class(fit)
+```
+
+
+
+#calculate a forecast, using our model
+
+#pass model fits to another function called forecast
+
+```{r}
+forecast1 <- fit %>% 
+  fabletools::forecast(h = "3 years")
+
+forecast1
+
+tail(beer_data, 1)
+```
+#plot it to see if it's a good fit
+
+```{r}
+forecast1 %>% 
+  autoplot(beer_data, level = NULL)
+```
+
+
+```{r}
+ast_arima_10years <- fit %>%
+  select(arima) %>%
+  fabletools::forecast(h = "10 years")
+
+ast_arima_10years
+
+ast_arima_10years %>% 
+  autoplot(beer_data)
+```
+
+```{r}
+forecast_10 <- fit %>%  
+  select(arima) %>% 
+  forecast(h = "10 years")
+
+forecast_10 %>% 
+  autoplot(beer_data)
+```
+
+
+```{r}
+beer_shorter <-
+  beer_data %>% 
+  filter(year(Quarter) >= 1980)
+
+forecast1 %>% 
+  #filter(.model == "snaive") %>% 
+  autoplot(beer_shorter, level = NULL)
+```
+
+
+# Compare model accuracy
+
+```{r}
+train <- beer_data %>% 
+  filter_index("1992 Q1" ~ "2006 Q4")
+
+fit_train <- train %>% 
+  model(arima = ARIMA(Beer),
+        snaive = SNAIVE(Beer))
+
+#make a forecast from training dataset
+forecast_train <-fit_train %>% 
+  forecast(h = 14)
+
+#plot the training dataset, with the forecast 
+
+```
+
+
+```{r}
+accuracy_model <- forecast_train %>% 
+  accuracy(beer_data)
+
+accuracy_model
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

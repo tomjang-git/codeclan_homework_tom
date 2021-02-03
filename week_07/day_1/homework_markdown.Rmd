@@ -1,0 +1,183 @@
+---
+title: "Untitled"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+library(lubridate)
+library(tsibbledata)
+library(janitor)
+library(tidyverse)
+library(ggplot2)
+library(tsibble)
+```
+
+What is the pattern of bike hires over time (e.g. within a year, month, week, or day)?
+
+#ok so what makes people rent a bike, or choose not to?
+#off the top of my head, I can think of a couple: weather, being able to afford a taxi (after payday), being hungover.
+#so it's probably not being able to afford it, since most of the rides are subscription--- although is that the right reasoning?
+#do people cycle less in the winter? Is there a gender divide on that front? Women have a higher pain threshold so may stick around in winter.
+
+
+#make a graph highlighting differences between men and women cyclists in the different seasons
+#make a graph highlighting the differences between riders on weekdays and weekends
+#make a graph highlighting the difference between riders after payday and before
+
+Do bike hire patterns differ between bike rider demographics? (e.g. gender, type of trip, age)
+
+Any other insights?
+
+
+#reading in names and cleaning
+
+```{r}
+nyc_bikes_df <- nyc_bikes %>% 
+  clean_names()
+
+nyc_bikes_df
+```
+
+#giving extra columns for each of month, day, year.
+
+```{r}
+nyc_bikes_df <-
+nyc_bikes_df %>% 
+  mutate(year = year(start_time),
+         month = month(start_time),
+         week = week(start_time),
+         day = day(start_time)
+         ) %>%
+  mutate(weekday = weekdays(start_time)) %>% 
+  mutate(hour = hour(start_time),
+         minute = minute(start_time),
+         second = second(start_time)) %>% 
+  mutate(time_start = format(start_time, format = "%H:%M:%S")) %>% 
+  mutate(start_date = date(start_time))
+
+nyc_bikes_df
+```
+
+
+
+
+```{r}
+#summary of all hires on each individual day of the DF
+
+nyc_bikes_df_summ <-
+nyc_bikes_df %>% 
+  index_by(start_date) %>% 
+  summarise(hires = n()) 
+
+nyc_bikes_df_summ
+
+#summary of all hires on each month of the DF
+
+#want to create a column that summarises how many women rented bikes per month, how many men hired bikes per month
+
+nyc_bikes_df_summ_month <-
+  nyc_bikes_df %>% 
+  index_by(month) %>% 
+  summarise(hires = n())
+            #,
+            #female = n(gender == "Female")) 
+nyc_bikes_df_summ_month
+
+
+#nyc_bikes_df_summ_month_gender <-
+  nyc_bikes_df %>% 
+  group_by(gender, type) %>% 
+  summarise(count = n())
+  
+  
+
+nyc_bikes_df_summ_month_gender
+
+
+#summary of all hires on each day of the month in the DF (1st, 23rd etc)
+
+nyc_bikes_df_summ_day <-
+  nyc_bikes_df %>% 
+  index_by(day) %>% 
+  summarise(hires = n())
+
+nyc_bikes_df_summ_day
+
+#summary of all hires on each  of the DF. For use in bar or col graph
+
+nyc_bikes_df_summ_day_before_10 <-
+  nyc_bikes_df %>% 
+  filter(hour <= 10) %>% 
+  index_by(hour) %>% 
+  summarise(hires = n())
+
+nyc_bikes_df_summ_day_before_10
+```
+
+
+```{r}
+nyc_bikes_df_summ %>%
+  ggplot(aes(x = start_date, y = hires)) +
+  geom_point() + 
+  geom_line()
+
+nyc_bikes_df_summ_month %>%
+  ggplot(aes(x = month, y = hires)) +
+  geom_point() + 
+  geom_line() +
+  scale_x_continuous(breaks = 1:12)
+
+nyc_bikes_df_summ_day %>%
+  ggplot(aes(x = day, y = hires)) +
+  geom_point() + 
+  geom_line() +
+  scale_x_continuous(breaks = 1:31) +
+  geom_smooth(method = lm)
+
+```
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

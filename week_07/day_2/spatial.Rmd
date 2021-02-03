@@ -1,0 +1,103 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+library(sf)
+library(tidyverse)
+```
+
+```{r}
+north_carolina <- st_read(system.file("shape/nc.shp", package = "sf"))
+```
+
+```{r}
+north_carolina
+```
+
+```{r}
+class(north_carolina)
+```
+
+
+
+
+```{r}
+nc_geometry <- st_geometry(north_carolina)
+
+north_carolina
+```
+
+
+```{r}
+plot(north_carolina[1])
+```
+
+
+
+```{r}
+ggplot(north_carolina) +
+  aes(fill = SID74) +
+  geom_sf()
+```
+
+
+```{r}
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(rgeos)
+```
+
+```{r}
+world <- ne_countries(scale = "medium", returnclass = "sf")
+
+view(world)
+```
+
+
+```{r}
+ggplot(world) +
+  geom_sf(color = "black", fill = "light green")
+```
+
+
+```{r}
+ggplot(world) +
+  geom_sf(aes(fill = pop_est)) +
+  scale_fill_viridis_c(option = "plasma", trans = "sqrt")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
