@@ -143,8 +143,356 @@ unique(health_board_incidences_Borders$year)
 
 
 ```{r}
+health_board_incidences_Borders %>% 
+  filter(cancer_site != "All cancer types") %>% 
+  group_by(cancer_site) %>% 
+  arrange(desc(incidences_all_ages))
+```
+
+
+```{r}
+health_board_incidences_Borders %>% 
+  dplyr::select(-crude_rate_lower95pc_confidence_interval, -crude_rate_upper95pc_confidence_interval, -sex_qf, cancer_site_icd10code, -easr_lower95pc_confidence_interval, -easr_lower95pc_confidence_interval_qf, -easr_upper95pc_confidence_interval, -easr_upper95pc_confidence_interval_qf, -wasr_lower95pc_confidence_interval, -wasr_lower95pc_confidence_interval_qf, -wasr_upper95pc_confidence_interval, -wasr_upper95pc_confidence_interval_qf, -sir_lower95pc_confidence_interval, -sir_upper95pc_confidence_interval) %>% 
+  pivot_longer(cols = c("incidences_all_ages", "crude_rate", "easr",),
+               names_to = "metric",
+               values_to = "value")
+```
+
+```{r}
+read_csv("raw_data/borders_population.csv") %>% 
+  clean_names() %>% 
+  group_by(date_code) %>% 
+  summarise(total = sum(value))
+```
+
+
+```{r}
+borders_population <-
+read_csv("raw_data/borders_population.csv") %>% 
+  clean_names() %>% 
+  filter(feature_code == "S08000016",
+         age == "All",
+         sex == "All") %>% 
+  mutate(population = value) %>% 
+  dplyr::select(-measurement, -units, -age, -sex, -value)
+
+borders_population
+```
+
+```{r}
+health_board_incidences_Borders_population <-
+inner_join(borders_population, health_board_incidences_Borders, by = c("date_code" = "year")) %>% 
+  dplyr::select(-crude_rate_lower95pc_confidence_interval, -crude_rate_upper95pc_confidence_interval, -sex_qf, cancer_site_icd10code, -easr_lower95pc_confidence_interval, -easr_lower95pc_confidence_interval_qf, -easr_upper95pc_confidence_interval, -easr_upper95pc_confidence_interval_qf, -wasr_lower95pc_confidence_interval, -wasr_lower95pc_confidence_interval_qf, -wasr_upper95pc_confidence_interval, -wasr_upper95pc_confidence_interval_qf, -sir_lower95pc_confidence_interval, -sir_upper95pc_confidence_interval) %>% 
+  mutate(per_hundred_thousand = incidences_all_ages/population * 100000)
+
+health_board_incidences_Borders_population
+```
+
+```{r}
+health_board_incidences_Borders_population %>% 
+  pivot_longer(cols = c("incidences_all_ages", "crude_rate", "easr",),
+               names_to = "metric",
+               values_to = "value") 
+```
+
+
+```{r}
+health_board_incidences_Borders_population %>% 
+  pivot_longer(cols = c("incidences_all_ages", "crude_rate", "easr",),
+               names_to = "metric",
+               values_to = "value") %>% 
+  group_by(cancer_site) %>% 
+  ggplot() +
+  aes(x = date_code, y = value, fill = metric) +
+  geom_line()
+   
+```
+
+```{r}
+health_board_incidences_Borders_lean <-
+  health_board_incidences_Borders %>%  
+  dplyr::select(-crude_rate_lower95pc_confidence_interval, -crude_rate_upper95pc_confidence_interval, -sex_qf, cancer_site_icd10code, -easr_lower95pc_confidence_interval, -easr_lower95pc_confidence_interval_qf, -easr_upper95pc_confidence_interval, -easr_upper95pc_confidence_interval_qf, -wasr_lower95pc_confidence_interval, -wasr_lower95pc_confidence_interval_qf, -wasr_upper95pc_confidence_interval, -wasr_upper95pc_confidence_interval_qf, -sir_lower95pc_confidence_interval, -sir_upper95pc_confidence_interval)
+  
+```
+
+
+```{r}
+health_board_incidences_Borders_lean %>% 
+  filter(year >= 2005, 
+         cancer_site != "All cancer types") %>% 
+  group_by(cancer_site) %>% 
+  ggplot() +
+  aes(x = reorder(cancer_site, incidences_all_ages), y = incidences_all_ages) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
+  geom_col(fill = "#800020") +
+  scale_x_discrete() +
+  labs(x = "Type of Cancer", y = "Incidences") +
+  coord_flip()
 
 ```
+
+So I'm going with the last ten years of data, which seems like more than enough for the topic.
+
+
+```{r}
+health_board_incidences_Borders_lean %>% 
+  filter(year >= 2005, 
+         cancer_site != "All cancer types",
+         sex == "Male") %>% 
+  group_by(cancer_site) %>% 
+  arrange(desc(incidences_all_ages)) 
+```
+
+
+```{r}
+health_board_incidences_Borders %>% 
+  filter(cancer_site == "Non-melanoma skin cancer" | cancer_site ==  "Basal cell carcinoma of the skin" | cancer_site == "Squamous cell carcinoma of the skin" ,
+         year >= 2005) %>% 
+  summarise(sum = sum(incidences_all_ages))
+```
+```{r}
+health_board_incidences_Borders %>% 
+  filter(cancer_site == "Prostate",
+         year >= 2005) %>% 
+  summarise(sum = sum(incidences_all_ages))
+```
+
+```{r}
+health_board_incidences_Borders %>% 
+  filter(cancer_site == "Rectum and rectosigmoid junction" | cancer_site ==  "Colon" | cancer_site == "Colorectal cancer" ,
+         year >= 2005) %>% 
+  summarise(sum = sum(incidences_all_ages))
+```
+
+
+
+
+
+
+
+```{r}
+sort(cancers)
+```
+
+
+
+
+```{r}
+unique(health_board_incidences_Borders$cancer_site_icd10code)
+```
+
+```{r}
+health_board_incidences %>% 
+  filter(cancer_site_icd10code == "C50")
+```
+```{r}
+health_board_incidences %>% 
+  filter(grepl("C44", cancer_site_icd10code)) %>% 
+  filter(cancer_site != "All cancer types") %>% 
+  distinct(cancer_site_icd10code)
+
+```
+```{r}
+health_board_incidences %>% 
+  filter(grepl("C8", cancer_site_icd10code)) %>% 
+  filter(cancer_site != "All cancer types") %>% 
+  distinct(cancer_site_icd10code)
+
+```
+
+
+```{r}
+health_board_incidences %>% 
+  distinct(as.vector(cancer_site_icd10code)) %>% 
+  arrange()
+```
+
+
+
+```{r}
+health_board_incidences_Borders_icd <-
+  health_board_incidences_Borders %>% 
+  #filter out the more narrow ranges, there's colorectal 18-20 so i don't need 18 or 19-20. Same with c44, it includes both squamous and basal
+  filter(cancer_site_icd10code != "C19-C20",
+         cancer_site_icd10code != "C18",
+         cancer_site_icd10code != "C92.1-C92.2",
+         #skin cancer
+         cancer_site_icd10code != "C44, M-8050-8078, M-8083-8084",
+         cancer_site_icd10code != "C44, M-8090-8098",
+         #leukemia
+         cancer_site_icd10code != "C92.1-C92.2", 
+         cancer_site_icd10code != "C01, C02.4, C05.1, C05.2, C09, C10",
+         cancer_site_icd10code != "C00-C14",
+         cancer_site_icd10code != "C01, C02.4, C05.1, C05.2, C09, C10",
+         cancer_site_icd10code != "C01, C02.4, C05.1, C05.2, C09, C10",         
+         cancer_site_icd10code != "C00-C14, C30-C32	",
+         cancer_site_icd10code != "C00-C97, excluding C44	",
+         #keeping 01-06, which is oral cancer
+         cancer_site_icd10code != "C01-C02",
+         cancer_site_icd10code != "C03-C06",
+         #keeping 53-55, which is Uterine cancer
+         cancer_site_icd10code != "C53",
+         cancer_site_icd10code != "C54",
+         #not sure what this is but removing duplicate not including the D numbers
+         cancer_site_icd10code != "C70-C72, C75.1-C75.3",
+         cancer_site_icd10code != "C91.0",
+         cancer_site_icd10code != "C91.1",
+         cancer_site_icd10code != "C92.0",
+
+
+         
+         
+         )
+
+health_board_incidences_Borders_icd %>% 
+  distinct(cancer_site_icd10code) %>% 
+  arrange(cancer_site_icd10code)
+```
+
+```{r}
+health_board_incidences_Borders_icd %>% 
+  filter(year >= 2005, 
+         cancer_site != "All cancer types") %>% 
+  ggplot() +
+  aes(x = reorder(cancer_site, -incidences_all_ages), y = incidences_all_ages) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
+  geom_col(fill = "#800020") +
+  scale_x_discrete() +
+  labs(x = "Type of Cancer", y = "Incidences") +
+  coord_flip()
+
+```
+
+```{r}
+write_csv(health_board_incidences_Borders_icd, "clean_data/health_board_incidences_Borders_icd.csv")
+```
+
+
+```{r}
+
+health_board_incidences_Borders_icd %>% 
+  distinct(as.vector(cancer_site)) %>% 
+  arrange()
+
+cancer_sites_icd <-
+sort(unique(health_board_incidences_Borders_icd$cancer_site))
+```
+
+
+```{r}
+health_board_incidences_Borders_icd %>% 
+  filter(year >= 2005,
+         cancer_site != "All cancer types",
+         sex == "All") %>% 
+  group_by(cancer_site) %>% 
+    summarise(incidences_2018 = sum(incidences_all_ages)) %>% 
+  arrange(desc(incidences_2018)) %>% 
+  ggplot() +
+  aes(x = reorder(cancer_site, incidences_2018), y = incidences_2018) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
+  geom_col(fill = "#800020") +
+  scale_x_discrete() +
+  labs(x = "Type of Cancer", y = "Since 2005") +
+  coord_flip()
+  
+ 
+    
+```
+
+```{r}
+health_board_incidences_Borders_icd %>% 
+  filter(year == 2018,
+         cancer_site != "All cancer types",
+         sex == "All") %>% 
+  group_by(cancer_site) %>% 
+    summarise(incidences_2018 = sum(incidences_all_ages)) %>% 
+  arrange(desc(incidences_2018)) %>% 
+  ggplot() +
+  aes(x = reorder(cancer_site, incidences_2018), y = incidences_2018) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
+  geom_col(fill = "#800020") +
+  scale_x_discrete() +
+  labs(x = "Type of Cancer", y = "2018") +
+  coord_flip()
+  
+ 
+    
+```
+
+
+
+
+```{r}
+health_board_incidences_Borders_icd %>% 
+  filter(year == 2018,
+         sex == "All") %>% 
+  group_by(cancer_site) %>% 
+    summarise(incidences_since_2005 = sum(incidences_all_ages)) %>% 
+  arrange(desc(incidences_since_2005))
+   
+```
+
+```{r}
+health_board_incidences_Borders_icd %>% 
+  filter(cancer_site == "Prostate")
+```
+
+```{r}
+health_board_incidences_Borders_icd %>% 
+  filter(year == 2018,
+         cancer_site != "All cancer types",
+         sex == "Female") %>% 
+  group_by(cancer_site) %>% 
+    summarise(incidences_2018 = sum(incidences_all_ages)) %>% 
+  arrange(desc(incidences_2018)) %>% 
+  ggplot() +
+  aes(x = reorder(cancer_site, incidences_2018), y = incidences_2018) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
+  geom_col(fill = "#800020") +
+  scale_x_discrete() +
+  labs(x = "Type of Cancer", y = "2018") +
+  coord_flip()
+  
+ 
+```
+
+```{r}
+health_board_incidences_Borders_icd %>% 
+  filter(year == 2018,
+         cancer_site != "All cancer types",
+         sex == "Male") %>% 
+  group_by(cancer_site) %>% 
+    summarise(incidences_2018 = sum(incidences_all_ages)) %>% 
+  arrange(desc(incidences_2018)) %>% 
+  ggplot() +
+  aes(x = reorder(cancer_site, incidences_2018), y = incidences_2018) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) +
+  geom_col(fill = "#800020") +
+  scale_x_discrete() +
+  labs(x = "Type of Cancer", y = "2018") +
+  coord_flip()
+  
+ 
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

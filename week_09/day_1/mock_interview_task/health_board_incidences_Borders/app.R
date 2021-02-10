@@ -15,7 +15,7 @@ library(sp)
 library(raster) 
 library(leaflet)
 
-health_board_incidences_Borders <- read_csv("/Users/user/codeclan_homework_tom/week_09/day_1/mock_interview_task/clean_data/health_board_incidences_Borders.csv")
+health_board_incidences_Borders_icd <- read_csv("/Users/user/codeclan_homework_tom/week_09/day_1/mock_interview_task/clean_data/health_board_incidences_Borders_icd.csv")
 
 
 
@@ -34,28 +34,29 @@ ui <- fluidPage(
             
             selectInput("cancer_site", 
                         "Cancer Type",
-                        choices = cancers
+                        choices = sort(cancer_sites_icd)
             )
         ),
         
         mainPanel(
             plotOutput("cancer_plot")
-           )
+        )
         )
     )
     
     server <- function(input, output) {
         output$cancer_plot <- renderPlot({
             
-            health_board_incidences_Borders %>% 
-                filter(year >= 2000) %>% 
+            health_board_incidences_Borders_icd %>% 
+                filter(year >= 2005) %>% 
                 filter(sex == input$sex) %>% 
                 filter(cancer_site == input$cancer_site) %>% 
                 ggplot() +
-                aes(x = year, y = crude_rate) +
-                geom_col(fill = "#800020") +
+                aes(x = year, y = incidences_all_ages) +
+                geom_line(colour = "#800020") +
                 theme(axis.text.x = element_text(angle = 45, vjust = 0.5)) +
                 scale_x_continuous(breaks = 2000:2020) +
+                labs(x = "Year", y = "Incidences") +
                 geom_smooth(method = "lm")
         })
     }
