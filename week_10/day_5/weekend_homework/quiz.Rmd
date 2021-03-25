@@ -1,0 +1,162 @@
+---
+title: "Homework Quiz"
+output: html_notebook
+---
+
+I want to predict how well 6 year-olds are going to do in their final school exams. Using the following variables am I likely under-fitting, fitting well or over-fitting? Postcode, gender, reading level, score in maths test, date of birth, family income.
+
+I think the model is likely to be an overfit: 
+
+-Reading level for obvious reasons.
+-Similarly for Score in maths test.
+-Date of birth may be a relevant variable because there is a big difference in development between someone just turned six, and someone who's nearly seven.
+
+However:
+
+-I'm not sure gender would be entirely relevant in a model,
+-Postcode is a strong proxy for socioeconomic status, which is a good indicator, but we already have family income.
+
+__________________________________________________________________________________________________________________
+
+If I have two models, one with an AIC score of 34,902 and the other with an AIC score of 33,559 which model should I use?
+
+The one with a score of 33559. (lower is better)
+__________________________________________________________________________________________________________________
+
+I have two models, the first with: r-squared: 0.44, adjusted r-squared: 0.43. The second with: r-squared: 0.47, adjusted r-squared: 0.41. Which one should I use?
+
+The first one, with adjusted r-squared 0.43 (adjusted higher is better)
+
+__________________________________________________________________________________________________________________
+
+I have a model with the following errors: RMSE error on test set: 10.3, RMSE error on training data: 10.4. Do you think this model is over-fitting?
+
+More context is needed to say.
+
+__________________________________________________________________________________________________________________
+How does k-fold validation work?
+
+K-fold validation tests the effectiveness of a model: 
+
+Shuffles the dataset randomly and splits the dataset into "k folds". For each unique group, it takes the group as a test data set and takes the remaining groups as a training data set. Then average out performance across all folds.
+
+
+
+__________________________________________________________________________________________________________________
+What is a validation set? When do you need one?
+
+To confirm as a last measure that the model being assessed is effective.
+
+
+__________________________________________________________________________________________________________________
+Describe how backwards selection works.
+
+Start with the model containing all possible predictors (the so-called ‘full’ model) as opposed to the model containing only the intercept. Finding and removing the predictor that lowers r2 the least when it is removed. Removing another predictor, until all predictors in the model have been removed
+
+__________________________________________________________________________________________________________________
+Describe how best subset selection works.
+
+Instead of adding a predictor for good like in forward selection, or removing it for good in backwards selection, searching at each size of model for the one with the highest r-square.
+
+__________________________________________________________________________________________________________________
+It is estimated on 5% of model projects end up being deployed. What actions can you take to maximise the likelihood of your model being deployed?
+
+Recording the following:
+
+The business context of the model
+Model design decisions and rationale including choice of algorithm, build population and target variable.
+Modelling decisions including a full audit trail of variable choices, including any exclusions.
+Final model explainability
+Model validation on a recent dataset
+Implementation instructions including any restrictions
+
+__________________________________________________________________________________________________________________
+What metric could you use to confirm that the recent population is similar to the development population?
+
+
+
+
+__________________________________________________________________________________________________________________
+How is the Population Stability Index defined? What does this mean in words?
+__________________________________________________________________________________________________________________
+Above what PSI value might we need to start to consider rebuilding or recalibrating the model
+__________________________________________________________________________________________________________________
+What are the common errors that can crop up when implementing a model?
+__________________________________________________________________________________________________________________
+After performance monitoring, if we find that the discrimination is still satisfactory but the accuracy has deteriorated, what is the recommended action?
+__________________________________________________________________________________________________________________
+Why is it important to have a unique model identifier for each model?
+__________________________________________________________________________________________________________________
+Why is it important to document the modelling rationale and approach?
+__________________________________________________________________________________________________________________
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
