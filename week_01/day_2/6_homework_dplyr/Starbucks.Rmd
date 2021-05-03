@@ -13,78 +13,105 @@ library(tidyverse)
 starbucks <- read_csv("data/starbucks_drinkMenu_expanded.csv")
 ```
 
+#question 1
 
 ```{r}
 ncol(starbucks)
-```
-
-```{r}
 nrow(starbucks)
-```
-
-```{r}
 dim(starbucks)
-```
-
-
-```{r}
 names(starbucks)
+head(starbucks, 5)
+tail(starbucks, 5)
 ```
+
+#question 2
+
+```{r}
+starbucks %>% 
+  select(Beverage_category, Beverage, Beverage_prep, Calories) %>% 
+  filter(is.na(Calories)) %>% 
+  summarise(missing_calories = n())
+  
+```
+
+#question 3
 
 
 ```{r}
-head(starbucks)
-```
+starbucks <- 
+  starbucks %>% 
+  mutate(calorie_diff = Calories - 135)
 
-
-```{r}
-calorie_diff <- select(starbucks, 135 - "Calories")
-```
-
-```{r}
-select(starbucks, -Beverage)
-```
-
-
-
-
-```{r}
 starbucks
 ```
+#question 4
+
+```{r}
+starbucks %>% 
+  group_by(Beverage_category) %>% 
+  summarise(average_calories = mean(Calories)) %>% 
+  arrange(desc(average_calories)) %>% 
+  head(3) 
+
+starbucks %>% 
+  group_by(Beverage_category) %>% 
+  summarise(average_calories = mean(Calories)) %>% 
+  arrange(average_calories) %>% 
+  head(3) 
+
+```
+
+#question 5
+
+```{r}
+starbucks %>% 
+  group_by(Beverage_prep) %>% 
+  summarise(average_calories = mean(Calories)) %>% 
+  arrange(desc(average_calories))
+```
 
 
+#question 6
+
+```{r}
+starbucks %>% 
+  summarise(average_calories = mean(Calories))
+```
 
 
 ```{r}
-select(starbucks, Beverage)
+starbucks %>% 
+  group_by(Beverage_prep) %>% 
+  summarise(average_calories = mean(Calories)) %>% 
+  filter(average_calories > 193.8719) %>% 
+  arrange(desc(average_calories))
+```
+
+#question 7
+
+```{r}
+starbucks %>% 
+  group_by(Beverage_category) %>% 
+  summarise(average_calories = mean(Calories)) %>% 
+  arrange(average_calories)
 ```
 
 
 
-```{r}
-select(starbucks, Beverage_category, Beverage, Beverage_prep, Calories)
-```
-
-
-```{r}
-q2 <- select(starbucks, Beverage_category, Beverage, Beverage_prep, Calories)
-```
-
-```{r}
-q2
-```
 
 
 
 
-```{r}
-is.na(q2)
-```
 
 
-```{r}
-calorie_diff <- filter(starbucks, Calories - "135")
-```
+
+
+
+
+
+
+
+
 
 
 
