@@ -1,137 +1,141 @@
 ---
-title: "R Notebook"
-output: html_notebook
+title: "cleaning_and_extra_dplyr_hw"
+
 ---
+
+#question_1
 
 ```{r}
 library(tidyverse)
-```
-
-```{r}
 movies <- read_csv("data/movies.csv")
 ```
 
+
+
 ```{r}
-movies
+dim(movies)
+#"select dimension of movies"
+
+colnames(movies)
+
+sum(is.na(movies))
+
+nrow(movies)
+nrow(movies) - nrow(drop_na(movies))
 ```
 
+#question_2
 
 ```{r}
 movies_selected <- movies %>% 
-  select("original_title", "runtime", "budget")
-```
+  select(title, runtime, budget)
 
-```{r}
 movies_selected
+
+#"create variable for movies_selected by: choosing movies, then selecting the columns a,b,c. then show variable movies_selected"
 ```
+#question_3
 
 ```{r}
 movies_selected %>% 
-  sum(is.na(movies_selected, original_title))
+  summarise(na_runtime = sum(is.na(runtime)),
+            na_title = sum(is.na(title)),
+            na_budget = sum(is.na(budget))
+            )
+
+#choose movies_selected. then create a new column each for a,b,c, summarising the sum total of the NA values within each column. 
+
+movies_selected %>% 
+  summarise(across(.fns = ~sum(is.na(.x))))
+
+#choose movies_selected. then create a new column summarise ACROSS  all different columns, .fns states that we will be choosing a function to run across all of them (still trying to understand the tilde) and then .x stands for the vector you're inputting (movies_selected)
 ```
 
-```{r}
-movies_selected %>%
-  summarise(count = sum(is.na(movies_selected)))
-```
 
-```{r}
-movies_selected %>%
-  across(count = sum(is.na(movies_selected)))
-```
+#question_4
 
 ```{r}
 movies_runtime <-
   movies_selected %>% 
-  na_if(runtime, 0)
-```
-
-```{r}
-movies_runtime <- 
-  movies_selected %>%
   mutate(runtime = na_if(runtime, 0))
-```
 
-```{r}
-movies_runtime
-```
-
-
-```{r}
-movies_runtime <-
-  movies_selected %>% 
-  mutate(
-  runtime = na_if(runtime, 0)
-  )  
-```
-
-```{r}
-movies_runtime
+movies_runtime %>% 
+  summarise(count = sum(is.na(runtime)))
 ```
 
 
-```{r}
-movies_imputed <- movies_runtime %>% 
-  mutate( runtime_imputed = 
-    coalesce(runtime = coalesce(runtime, median(runtime, na.rm = TRUE)))
-    
-  )
-  
-```
-
-
-```{r}
-movies_imputed
-```
-
-
-
-```{r}
-movies_imputed %>% 
-slice_min(runtime_imputed, n = 10)
-```
-
-
-```{r}
-movies_imputed %>% 
-slice_max(runtime_imputed, n = 10)
-```
-
-
-```{r}
-movies_imputed %>% 
-  select(runtime_imputed)
-```
-
-```{r}
-movies_imputed %>% 
-  select(budget) %>% 
-  mutate(
-    below_by_100 = if_else(median(budget > 100)
-  )
-```
-
-
+#question_5
 
 ```{r}
 movies_imputed <-
+  movies_runtime %>% 
+  mutate(runtime = coalesce(runtime, median(runtime, na.rm = TRUE)))
+
 movies_imputed %>% 
-  select(budget) %>% 
-  mutate(
-    below_by_100 = if_else(budget < 100, median(budget), budget)
-  )
+  summarise(count = sum(is.na(runtime)))
 ```
+
+
+
+
+
+#question_6
+
 
 ```{r}
-movies_imputed
+movies_imputed %>% 
+  slice_max(runtime, n = 10)
+
+movies_imputed %>% 
+  slice_min(runtime, n = 10)
+
+
 ```
 
 
-Extension
+
+
+
+#question_7
+
+```{r}
+movies_imputed %>% 
+  mutate(budget = if_else(budget < 100, median(budget), budget))
+```
 
 
 
 
+
+
+#extension
+
+
+
+#question_1
+
+
+```{r}
+movies_imputed %>% 
+  mutate(budget_type = case_when(budget < 12e6 ~ "Small budget",
+                                 budget < 40e6 ~ "Medium budget",
+                                 budget > 40e6 ~ "Big budget",)
+         
+         )
+```
+
+
+
+#question 2
+
+
+```{r}
+movies %>% 
+  summarise(across(where(is.character), ~sum(is.na(.x))))
+
+movies %>% 
+  summarise(across(where(is.numeric), ~sum(is.na(.x))))
+```
 
 
 
